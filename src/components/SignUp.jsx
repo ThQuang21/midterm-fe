@@ -12,13 +12,13 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import MenuItem from '@mui/material/MenuItem';
+import Link from '@mui/material/Link';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import signup from '../services/signup.service';
 import '../components/SignUp.css';
-
+import { useNavigate } from 'react-router-dom';
 
 const defaultTheme = createTheme();
 
@@ -26,8 +26,6 @@ const initialValues = {
     name: '',
     email: '',
     phone: '',
-    status: '',
-    address: '',
     job: '',
     age: '',
 };
@@ -40,19 +38,16 @@ const validationSchema = Yup.object({
     password: Yup.string()
         .required('Password is required')
         .matches(passwordRegex, 'Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character. It must be at least 6 characters long'),
-    phone: Yup.string().matches(/^\d+$/, 'Phone must be a number').max(25, 'Phone must be at most 25 characters'),
-    status: Yup.string(),
-    address: Yup.string().max(50, 'Address must be at most 25 characters'),
-    job: Yup.string().max(25, 'Job must be at most 25 characters'),
-    age: Yup.number().positive('Age must be a positive number').integer('Age must be an integer'),
+    phone: Yup.string().required('Phone is required').matches(/^\d+$/, 'Phone must be a number').max(25, 'Phone must be at most 25 characters'),
+    job: Yup.string().required('Job is required').max(25, 'Job must be at most 25 characters'),
+    age: Yup.number().required('Age is required').positive('Age must be a positive number').integer('Age must be an integer'),
 });
-
-const statuses = ['Married', 'Single', 'Divorced'];
 
 const SignUp = () => {
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
     const [snackbarSeverity, setSnackbarSeverity] = useState('error');
+    const navigate = useNavigate();
 
     const handleSnackbarClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -64,11 +59,12 @@ const SignUp = () => {
     const handleSubmit = async (values, { setSubmitting }) => {
         try {
             await signup(values);
-            console.log('Sign-up successful:', values);
+            setSnackbarMessage('Sign-up sucessfully');
+            setSnackbarSeverity('success');
+            setSnackbarOpen(true);
+            navigate('/home')
         } catch (error) {
-            console.error('Error during sign-up:', error);
-
-            setSnackbarMessage(error.response?.data?.message || 'Error during sign-up. Please try again.');
+            setSnackbarMessage(error.response.data.error || 'Error during sign-up. Please try again.');
             setSnackbarSeverity('error');
             setSnackbarOpen(true);
 
@@ -141,7 +137,7 @@ const SignUp = () => {
                                         variant="outlined"
                                         fullWidth
                                         id="phone"
-                                        label="Phone"
+                                        label="Phone*"
                                         name="phone"
                                         error={Boolean(validationSchema.fields.phone && validationSchema.fields.phone.errors)}
                                         helperText={<ErrorMessage name="phone" component="div" className="error-message" />}
@@ -152,37 +148,8 @@ const SignUp = () => {
                                         as={TextField}
                                         variant="outlined"
                                         fullWidth
-                                        id="status"
-                                        label="Status"
-                                        name="status"
-                                        select
-                                    >
-                                        {statuses.map((option) => (
-                                            <MenuItem key={option} value={option}>
-                                                {option}
-                                            </MenuItem>
-                                        ))}
-                                    </Field>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Field
-                                        as={TextField}
-                                        variant="outlined"
-                                        fullWidth
-                                        id="address"
-                                        label="Address"
-                                        name="address"
-                                        error={Boolean(validationSchema.fields.address && validationSchema.fields.address.errors)}
-                                        helperText={<ErrorMessage name="address" component="div" className="error-message" />}
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Field
-                                        as={TextField}
-                                        variant="outlined"
-                                        fullWidth
                                         id="job"
-                                        label="Job"
+                                        label="Job*"
                                         name="job"
                                         error={Boolean(validationSchema.fields.job && validationSchema.fields.job.errors)}
                                         helperText={<ErrorMessage name="job" component="div" className="error-message" />}
@@ -194,7 +161,7 @@ const SignUp = () => {
                                         variant="outlined"
                                         fullWidth
                                         id="age"
-                                        label="Age"
+                                        label="Age*"
                                         name="age"
                                         error={Boolean(validationSchema.fields.age && validationSchema.fields.age.errors)}
                                         helperText={<ErrorMessage name="age" component="div" className="error-message" />}
@@ -206,6 +173,9 @@ const SignUp = () => {
                             </Button>
                         </Form>
                     </Formik>
+                    <Link href="/signin" variant="body2">
+                        Already have an account? Sign in
+                    </Link>
                 </Box>
             </Container>
             <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleSnackbarClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
