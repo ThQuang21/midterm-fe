@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -16,6 +13,7 @@ import Container from '@mui/material/Container';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import AuthService from "../services/auth.service";
 
 function Copyright(props) {
     return (
@@ -70,26 +68,19 @@ export default function SignIn() {
             showAlert('Email and password are required.', 'error');
             return;
         }
-        try {
-            const response = await axios.post('http://localhost:8080/auth/signin', {
-                email: data.get('email'),
-                password: data.get('password'),
-            });
-
-            const { token } = response.data;
-            localStorage.setItem('email', data.get('email'));
-            localStorage.setItem('token', token);
-
-            showAlert('Sign-in successful', 'success');
-            navigate('/');
-        } catch (error) {
-            if (error.response && error.response.status === 401) {
-                showAlert('Invalid email or password. Please try again.', 'error');
-            } else {
-                console.error('Error during sign-in:', error);
-                showAlert('An unexpected error occurred. Please try again later.', 'error');
+        AuthService.signin(email, password).then(
+            () => {
+                showAlert('Sign-in successful', 'success');
+                navigate('/');
+            },
+            (error) => {
+                if (error.response && error.response.status === 401) {
+                    showAlert('Invalid email or password. Please try again.', 'error');
+                } else {
+                    showAlert('An unexpected error occurred. Please try again later.', 'error');
+                }
             }
-        }
+          )
     };
 
     return (

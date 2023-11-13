@@ -1,9 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 import Profile from "./components/Profile";
 import { Routes, Route, Link } from "react-router-dom";
-import SignIn from './components/signIn';
-
+import SignIn from './components/SignIn'
 
 function App() {
   return (
