@@ -8,14 +8,12 @@ import SignUp from "./components/SignUp";
 
 function App() {
   return (
-
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/profile" element={<Profile />} />
-          <Route exact path="/signin" element={<SignIn/>} />
-          <Route exact path="/signup" element={<SignUp/>} />
-        </Routes>
-        
+    <Routes>
+      <Route exact path="/" element={<Home />} />
+      <Route exact path="/profile" element={<Profile />} />
+      <Route exact path="/signin" element={<SignIn/>} />
+      <Route exact path="/signup" element={<SignUp/>} />
+    </Routes>
   );
 }
 

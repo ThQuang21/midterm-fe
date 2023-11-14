@@ -7,42 +7,53 @@ import profilePicture from "../images/profile.png";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import {CardActionArea, CardActions} from "@mui/material";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import Card from "@mui/material/Card";
 
 function ProfileCard(props) {
 
 	return (
 		<Container disableGutters maxWidth="sm" component="main" sx={{ pt: 8, pb: 6 }}>
-
-			<Box align={"center"}>
-				<Avatar src={avatar} sx={{ width: 80, height: 80 }}/>
-			</Box>
-
-			<Typography
-				component="h1"
-				variant="h3"
-				align="center"
-				color="text.primary"
-				gutterBottom
-			>
-				{props.name} - {props.age} years old
-			</Typography>
-			<Typography variant="h5" align="center" color="text.primary" component="p">
-				{props.job}
-			</Typography>
-			<Typography variant="h5" align="center" color="text.secondary" component="p">
-				Phone: {props.phone}
-			</Typography>
-			<Typography variant="h5" align="center" color="text.secondary" component="p">
-				Email: {props.email}
-			</Typography>
-
-			<Box align={"center"} py={{ xs: 2 }}>
-				<Button variant="contained" align="center">
-					EDIT
-				</Button>
-			</Box>
-
-
+			<Card style={{ border: "2px solid black" }}>
+				<CardActionArea>
+					<CardMedia
+						component="img"
+						height="140"
+						src={avatar}
+						alt="green iguana"
+					/>
+					<CardContent>
+						<Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+							{props.job}
+						</Typography>
+						<Typography gutterBottom variant="h5" component="div">
+							{props.name} - {props.age} years old
+						</Typography>
+						<Typography variant="body2" color="text.secondary">
+							Phone: {props.phone}
+						</Typography>
+						<Typography variant="body2" color="text.secondary">
+							Email: {props.email}
+						</Typography>
+					</CardContent>
+				</CardActionArea>
+				<CardActions>
+					<Button
+						variant="contained"
+						color="primary"
+						sx={{
+							'--variant-borderWidth': '2px',
+							borderRadius: 40,
+							borderColor: 'primary.500',
+							mx: 'auto',
+						}}
+					>
+						EDIT
+					</Button>
+				</CardActions>
+			</Card>
 		</Container>
 
 	);

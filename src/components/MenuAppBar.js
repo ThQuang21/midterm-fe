@@ -25,7 +25,6 @@ export default function MenuAppBar() {
     }
   }, [])
 
-
   const navigate = useNavigate();
 
   const handleChange = (event) => {
