@@ -8,7 +8,6 @@ const Profile = () => {
 
 	useEffect(() => {
 		AuthService.getUserByEmail().then((res) => {
-			console.log(res);
 			setUser(res)
 		});
 	}, [])
