@@ -57,7 +57,7 @@ export default function MenuAppBar() {
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} >
             <Link to={"/"} style={{ textDecoration: 'none', color: 'white', fontWeight: "bold" }}>
-              PHOTOS
+              HAQ GROUP
             </Link>
           </Typography>
 

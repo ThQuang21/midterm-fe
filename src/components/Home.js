@@ -54,12 +54,14 @@ export default function Home() {
               color="text.primary"
               gutterBottom
             >
-              Album layout
+              Web Application Development
             </Typography>
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
-              Something short and leading about the collection below—its contents,
-              the creator, etc. Make it short and sweet, but not too short so folks
-              don&apos;t simply skip over it entirely.
+            The course is designed to provide students advanced knowledge in web application
+            development. Student will learn how to build a single page application that utilize RESTful
+            web service. After finishing the course, students have the ability to design, architect,
+            implement, deploy and maintain a scalable web application.
+
             </Typography>
             <Stack
               sx={{ pt: 4 }}
@@ -67,8 +69,8 @@ export default function Home() {
               spacing={2}
               justifyContent="center"
             >
-              <Button variant="contained">Main call to action</Button>
-              <Button variant="outlined">Secondary action</Button>
+              <Button variant="contained">Learn now </Button>
+              <Button variant="outlined">See more information</Button>
             </Stack>
           </Container>
         </Box>
