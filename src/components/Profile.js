@@ -1,27 +1,34 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./Profile.css";
 import ProfileCard from "./ProfileCard";
+import AuthService from "../services/auth.service";
 
 const Profile = () => {
+	const [user, setUser] = useState('');
 
-    return (
+	useEffect(() => {
+		AuthService.getUserByEmail().then((res) => {
+			console.log(res);
+			setUser(res)
+		});
+	}, [])
+
+	return (
 		<div className="background">
 			<div className="bg-pattern-top"></div>
 			<div className="bg-pattern-bottom"></div>
 
 			<ProfileCard
-				name="Charlie Puth"
-				age="32 years old"
-                status="Single"
-                job="Singer"
-                phone="+21 213 838 12"
-                email="charlieputh12@gmail.com"
-				city="5A Ohio street, Ohio, USA"
+				name={user.name}
+				age={user.age}
+				status={user.status}
+				job={user.job}
+				phone={user.phone}
+				email={user.email}
+				city={user.city}
 			></ProfileCard>
 
 		</div>
 	);
 };
-
 export default Profile;
-
