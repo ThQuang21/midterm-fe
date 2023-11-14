@@ -18,7 +18,7 @@ import {useEffect} from "react";
 export default function MenuAppBar() {
   const [auth, setAuth] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+    
   useEffect(() => {
     if (localStorage.getItem('email') != null) {
       setAuth(true);
@@ -48,7 +48,7 @@ export default function MenuAppBar() {
     localStorage.removeItem("email");
     localStorage.removeItem("token");
     setAuth(false);
-    window.location.reload();
+    navigate('/')
   };
 
   return (

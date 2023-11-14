@@ -38,10 +38,31 @@ const signup = async (formData) => {
   }
 };
 
+const updateUser = async (formData, jwtToken) => {
+  try {
+    const url = API_URL + "user/";
+
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${jwtToken}`,
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const AuthService = {
   signin,
   signup,
-  getUserByEmail
+  getUserByEmail,
+  updateUser
 }
 
 export default AuthService;

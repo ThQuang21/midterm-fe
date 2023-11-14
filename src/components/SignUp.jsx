@@ -66,6 +66,7 @@ const SignUp = () => {
     setSnackbarOpen(false);
   };
   const handleSubmit = async (values, { setSubmitting }) => {
+    console.log(values)
     AuthService.signup(values).then(
       (res) => {
         setSnackbarMessage('Sign-up successfully');
