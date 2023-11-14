@@ -11,8 +11,20 @@ import {CardActionArea, CardActions} from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
+import {useNavigate} from "react-router-dom";
 
 function ProfileCard(props) {
+	const navigate = useNavigate();
+	const currentUser = props;
+
+	const handleSubmit = (user) => {
+		console.log(currentUser)
+		navigate('/update-profile', {
+			state: {
+				user: currentUser,
+			}
+		});
+	};
 
 	return (
 		<Container disableGutters maxWidth="sm" component="main" sx={{ pt: 8, pb: 6 }}>
@@ -49,6 +61,7 @@ function ProfileCard(props) {
 							borderColor: 'primary.500',
 							mx: 'auto',
 						}}
+						onClick={handleSubmit}
 					>
 						EDIT
 					</Button>

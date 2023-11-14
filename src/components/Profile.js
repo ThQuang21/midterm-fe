@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import ProfileCard from "./ProfileCard";
+import UpdateProfileCard from "./UpdateProfileCard";
 
 function Copyright(props) {
 	return (
