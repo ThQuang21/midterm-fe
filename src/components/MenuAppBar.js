@@ -4,21 +4,17 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Button from "@mui/material/Button";
-import {Link, useNavigate} from "react-router-dom";
-import {useEffect} from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function MenuAppBar() {
   const [auth, setAuth] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
-    
+
   useEffect(() => {
     if (localStorage.getItem('email') != null) {
       setAuth(true);
@@ -26,10 +22,6 @@ export default function MenuAppBar() {
   }, [])
 
   const navigate = useNavigate();
-
-  const handleChange = (event) => {
-    setAuth(event.target.checked);
-  };
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -98,6 +90,18 @@ export default function MenuAppBar() {
           {!auth && (
             <div>
               <Button color="inherit" href="/signin">Sign In</Button>
+              <Button
+                href="/signup"
+                variant="outlined"
+                sx={{
+                  ml: 2, borderColor: 'white', color: 'white', '&:hover': {
+                    backgroundColor: 'transparent',
+                    borderColor: 'white',
+                  },
+                }}
+              >
+                Sign Up
+              </Button>
             </div>
           )}
         </Toolbar>

@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from "react";
-import AuthService from "../services/auth.service";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MenuAppBar from "./MenuAppBar";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
-import ProfileCard from "./ProfileCard";
 import UpdateProfileCard from "./UpdateProfileCard";
 import {useLocation} from "react-router-dom";
 

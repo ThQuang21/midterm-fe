@@ -57,11 +57,9 @@ export default function Home() {
               Web Application Development
             </Typography>
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
-            The course is designed to provide students advanced knowledge in web application
+            The course is designed to provide students knowledge in web application
             development. Student will learn how to build a single page application that utilize RESTful
-            web service. After finishing the course, students have the ability to design, architect,
-            implement, deploy and maintain a scalable web application.
-
+            web service.
             </Typography>
             <Stack
               sx={{ pt: 4 }}

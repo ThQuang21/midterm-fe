@@ -7,12 +7,11 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import PersonIcon from '@mui/icons-material/Person';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import '../components/SignUp.css';
 import { useNavigate } from 'react-router-dom';
@@ -48,10 +47,7 @@ function UpdateProfileCard(props) {
 	const jwtToken = localStorage.getItem('token')
 	const handleSubmit = async (values, { setSubmitting }) => {
 		try {
-			console.log("handled");
-		
-			const response = await AuthService.updateUser(values, jwtToken);
-		
+			await AuthService.updateUser(values, jwtToken);
 			setSnackbarMessage('Update successfully');
 			setSnackbarSeverity('success');
 			setSnackbarOpen(true);
@@ -78,10 +74,10 @@ function UpdateProfileCard(props) {
 					}}
 				>
 					<Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-						<LockOutlinedIcon />
+						<PersonIcon />
 					</Avatar>
 					<Typography style={{ marginBottom: 1 + 'em' }} component="h1" variant="h5">
-						Sign up
+						Update Profile
 					</Typography>
 					<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
 						<Form>
